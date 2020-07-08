@@ -1,0 +1,54 @@
+/*Zoo Database Assignment 1*/
+USE db_zooTest;
+GO
+
+SELECT * FROM tbl_habitat;
+
+/*zoo database assignment 2*/
+USE db_zooTest;
+GO
+
+SELECT species_name
+FROM tbl_species
+WHERE species_order=3;
+
+SELECT * FROM tbl_species;
+
+/*zoo database assignment 3*/
+USE db_zooTest;
+GO
+
+SELECT nutrition_type
+FROM tbl_nutrition
+WHERE nutrition_cost >=600;
+
+SELECT * FROM tbl_nutrition;
+
+/*zoo database assignment 4*/
+USE db_zooTest;
+GO
+
+SELECT species_name
+FROM tbl_species, tbl_nutrition
+WHERE nutrition_id BETWEEN 2202 AND 2206;
+
+/*zoo database assignment 5*/
+USE db_zooTest;
+GO
+
+SELECT species_name AS Species_Name, nutrition_type AS Nutrition_Type
+FROM tbl_nutrition, tbl_species;
+
+/*zoo database assignment 6*/
+USE db_zooTest;
+GO
+SELECT * FROM tbl_care;
+
+SELECT * FROM tbl_species;
+
+SELECT * FROM tbl_specialist;
+
+SELECT tbl_specialist.specialist_fname, tbl_specialist.specialist_lname, tbl_specialist.specialist_contact, tbl_species.species_care
+FROM tbl_specialist
+INNER JOIN tbl_care ON specialist_id = care_specialist
+INNER JOIN tbl_species ON species_care = care_id;

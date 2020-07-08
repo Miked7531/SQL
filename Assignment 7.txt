@@ -1,0 +1,42 @@
+CREATE DATABASE db_sword;
+GO
+
+CREATE TABLE tbl_longsword (
+	sword_id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+	longsword_type VARCHAR(255) NOT NULL,
+	longsword_weight VARCHAR(50) NOT NULL
+	);
+
+CREATE TABLE tbl_katana (
+	katana_id INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+	katana_type VARCHAR(255) NOT NULL,
+	katana_weight VARCHAR(50) NOT NULL,
+	FOREIGN KEY (katana_id) REFERENCES tbl_longsword(sword_id)
+	);
+
+SELECT * FROM tbl_longsword;
+SELECT * FROM tbl_katana;	
+	
+INSERT INTO tbl_longsword
+	(longsword_type, longsword_weight)
+	VALUES
+	('XIIa', '1.1kg'),
+	('XVa','1.5kg'),
+	('XVIa','1.2kg'),
+	('XVII','2.1kg'),
+	('XVIIIb','1.7kg')
+	;
+
+INSERT INTO tbl_katana
+	(katana_type, katana_weight)
+	VALUES
+	('Tachi','.66kg'),
+	('Uchigatana','1.1kg'),
+	('Shin-gunto','1kg'),
+	('Daisho','1.2kg'),
+	('Odachi','4kg')
+	;
+
+SELECT tbl_longsword.longsword_weight, tbl_katana.katana_weight
+FROM tbl_longsword
+INNER JOIN tbl_katana ON sword_id=katana_id;
