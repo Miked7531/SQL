@@ -1,0 +1,212 @@
+CREATE DATABASE library;
+GO
+
+CREATE TABLE library_branch (
+	branchID INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+	branchname VARCHAR(255) NOT NULL,
+	address VARCHAR(255) NOT NULL,
+	);
+SELECT * FROM library_branch;
+
+CREATE TABLE borrower (
+	cardno INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+	name VARCHAR(255) NOT NULL,
+	address VARCHAR(255) NOT NULL,
+	phone varchar(255) NOT NULL,
+	);
+
+SELECT * FROM borrower;
+
+CREATE TABLE book_copies (
+	bookID INT NOT NULL,
+	branchID INT NOT NULL,
+	number_of_copies INT NOT NULL,
+	);
+
+SELECT * FROM book_copies;
+
+CREATE TABLE books (
+	bookID INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+	title VARCHAR(255) NOT NULL,
+	publishername VARCHAR(255) NOT NULL
+	);
+
+SELECT * FROM books;
+SELECT * FROM book_copies;
+
+CREATE TABLE book_authors (
+	bookID INT NOT NULL,
+	authorname VARCHAR(255) NOT NULL
+	);
+
+CREATE TABLE book_loans (
+	bookID INT NOT NULL,
+	branchID INT NOT NULL,
+	cardno INT NOT NULL,
+	dateout VARCHAR(255) NOT NULL,
+	datedue VARCHAR(255) NOT NULL,
+	);
+
+SELECT * FROM book_loans;
+
+CREATE TABLE publisher (
+	publishername VARCHAR(255), 
+	address VARCHAR(255) NOT NULL,
+	phone VARCHAR(255) NOT NULL
+	);
+
+INSERT INTO library_branch
+	(branchname, address)
+	VALUES
+	('sharpstown', 'b lane'),
+	('cheddar', 'a lane'),
+	('swiss', 'c lane'),
+	('parmesan', 'd lane'),
+	('ricotta', 'e lane'),
+	('brie', 'f lane')
+	;
+
+SELECT * FROM library_branch;
+
+INSERT INTO borrower
+	(name,address,phone)
+	VALUES
+	('bob','abc lane','111-111-1111'),
+	('bill','qwe lane','222-222-2222'),
+	('jon','rty lane','333-333-3333'),
+	('brittney','uio lane','444-444-4444'),
+	('susan','asd lane','555-555-5555'),
+	('amber','fgh lane','666-666-6666'),
+	('bri','jkl lane','777-777-7777'),
+	('aurora','zxc lane','888-888-8888')
+	;
+
+SELECT * FROM borrower;
+
+INSERT INTO publisher
+	(publishername, address, phone)
+	VALUES
+	('bobby','bob rd','848-111-1111'),
+	('jackie','jk ave','878-222-2222'),
+	('john','who rd','898-333-3333'),
+	('harold','hair lane','969-444-4444'),
+	('olivia','olive rd','545-555-5555'),
+	('joe','dirt ave','484-666-6666'),
+	('ben','po lane','656-777-7777'),
+	('kim','mtn rd','252-888-8888'),
+	('kat','kitten ave','151-999-9999'),
+	('george','yellow lane','363-556-8987')
+	;
+SELECT * FROM publisher;
+
+INSERT INTO books
+	(title, publishername)
+	VALUES
+	('the lost tribe','bobby'),
+	('pretty','bobby'),
+	('snakes','bobby'),
+	('birds','jackie'),
+	('hills','john'),
+	('mountains','harold'),
+	('trucks','olivia'),
+	('trailers','joe'),
+	('farms','ben'),
+	('apples','kim'),
+	('agriculture','kat'),
+	('planes','george'),
+	('mysteries','kat'),
+	('crime','george'),
+	('numbers','kim'),
+	('yes','olivia'),
+	('no','john'),
+	('information','jackie'),
+	('toilets','john'),
+	('hvac','joe')
+	;
+SELECT * FROM books;
+
+INSERT INTO book_authors
+	(bookID, authorname)
+	VALUES
+	('1','paul'),
+	('2','paul'),
+	('3','paul'),
+	('4','paul'),
+	('5','don'),
+	('6','don'),
+	('7','don'),
+	('8','don'),
+	('9','don'),
+	('10','luke'),
+	('11','luke'),
+	('12','luke'),
+	('13','luke'),
+	('14','luke'),
+	('15','amy'),
+	('16','amy'),
+	('17','amy'),
+	('18','amy'),
+	('19','jon'),
+	('20','jon')
+	;
+SELECT * FROM book_authors;
+
+INSERT INTO book_copies
+	(number_of_copies,bookID,branchID)
+	VALUES
+	('2','1','1'),
+	('4','2','1'),
+	('5','3','1'),
+	('3','4','1'),
+	('2','5','2'),
+	('6','6','2'),
+	('7','7','2'),
+	('4','8','2'),
+	('3','9','2'),
+	('4','10','3'),
+	('7','11','3'),
+	('9','12','3'),
+	('6','13','3'),
+	('4','14','4'),
+	('2','15','4'),
+	('6','16','5'),
+	('7','17','5'),
+	('9','18','6'),
+	('6','19','6'),
+	('5','20','4')
+	;
+SELECT * FROM book_copies;
+
+INSERT INTO book_loans
+	(bookID,branchID,cardno,dateout,datedue)
+	VALUES
+	('1','1','1','1960-07-10','1960-10-10'),
+	('2','1','2','1965-05-22','1965-11-11'),
+	('3','1','3','1877-04-20','1877-08-22'),
+	('4','1','4','1977-06-07','1980-12-28'),
+	('5','2','5','1922-10-10','1922-12-11'),
+	('6','2','6','1910-04-04','1911-01-13'),
+	('7','2','7','1555-12-22','1556-12-22'),
+	('8','2','8','2001-03-31','2002-10-20'),
+	('9','2','9','2010-10-10','2010-12-11'),
+	('10','3','10','2012-02-10','2012-05-15'),
+	('11','3','11','2015-06-16','2015-07-17'),
+	('12','3','12','1681-08-18','1681-08-25'),
+	('13','3','13','1755-03-11','1755-03-12'),
+	('14','4','14','1940-01-10','1941-01-10'),
+	('15','4','15','1962-12-12','1963-10-10'),
+	('16','5','16','1999-09-19','2000-01-01'),
+	('17','5','17','2003-02-20','2003-10-22'),
+	('18','6','18','2004-04-14','2005-06-15'),
+	('19','6','19','2007-08-18','2007-10-10'),
+	('20','4','20','2010-12-06','2011-11-11')
+	;
+SELECT * FROM book_loans;
+
+SELECT *
+FROM book_loans
+FULL OUTER JOIN borrower ON book_loans.cardno=borrower.cardno
+FULL OUTER JOIN books ON book_loans.bookID=books.bookID;
+
+SELECT title, authorname
+FROM book_authors, books;
